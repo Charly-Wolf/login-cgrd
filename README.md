@@ -2,7 +2,7 @@
 
 Welcome to the Login Coding Challenge! 🎉
 
-This is a simple PHP-based dashboard application with functionalities for user login and management.
+This is a simple PHP-based dashboard application with functionalities for user login and news items management.
 
 ## 🗂️ Project Structure
 
