@@ -1,5 +1,5 @@
 <?php
-include_once("routes.php");
+include_once("controller.php");
 include_once("utils/notifications.php");
 
 // Redirect to login page if the user is not logged in
@@ -49,7 +49,7 @@ $editNewsDescription = isset($_SESSION['edit_news_description']) ? $_SESSION['ed
                                 <span class="news-title"><?= htmlspecialchars($news->getTitle()) ?></span>
                                 <p class="news-description"><?= htmlspecialchars($news->getDescription()) ?></p>
                             </div>
-                            <form class="news-icons" method="post" action="routes.php">
+                            <form class="news-icons" method="post" action="controller.php">
                                 <input type="hidden" name="news_id" value="<?= $news->getId() ?>">
                                 <button type="button" class="action-btn edit-btn" data-id="<?= $news->getId() ?>" data-title="<?= htmlspecialchars($news->getTitle()) ?>" data-description="<?= htmlspecialchars($news->getDescription()) ?>" title="Edit">
                                     <i class="edit-icon"></i>
@@ -65,7 +65,7 @@ $editNewsDescription = isset($_SESSION['edit_news_description']) ? $_SESSION['ed
 
             <div class="create-news-container">
                 <div class="form-container">
-                    <form id="news-form" method="post" action="routes.php">
+                    <form id="news-form" method="post" action="controller.php">
                         <div class="form-title">
                             <h2 id="form-title"><?php echo $editNewsId ? 'Edit News' : 'Create News'; ?></h2>
                             <button id="cancel-btn" type="button" class="action-btn hidden">
