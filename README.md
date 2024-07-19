@@ -35,7 +35,7 @@ This is a simple PHP-based dashboard application with functionalities for user l
 2. **Clone the Repository:**
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Charly-Wolf/login-cgrd
    ```
 
 - After cloning the repository, move the folder into the `htdocs` directory of your XAMPP installation. By default, this directory is located at `C:\xampp\htdocs` on Windows or `/Applications/XAMPP/htdocs` on macOS.
