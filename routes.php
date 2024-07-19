@@ -1,7 +1,10 @@
 <?php
 session_start();
-include("config/connect.php");
-include("classes/News.php");
+include_once('config/connect.php'); 
+include_once('classes/News.php'); 
+include_once('utils/notifications.php'); 
+include_once('classes/NotificationType.php');
+
 
 // Routing
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -21,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Methods
-function getAllNews() {
+function getAllNews(): array {
     global $conn;
     $newsArray = [];
 
@@ -39,13 +42,13 @@ function getAllNews() {
     return $newsArray;
 }
 
-function createNews() {
+function createNews(): void {
     global $conn;
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
 
     if (empty($title) || empty($description)) {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "Title and description cannot be empty!"];
+        setNotification(new Notification(NotificationType::ERROR, "Title and description cannot be empty!"));
         header("Location: dashboard.php");
         exit();
     }
@@ -56,16 +59,16 @@ function createNews() {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        $_SESSION['notification'] = ['type' => 'success', 'message' => "News was successfully created!"];
+        setNotification(new Notification(NotificationType::SUCCESS, "News was successfully created!"));
     } else {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "Error! News could not be created."];
+        setNotification(new Notification(NotificationType::ERROR, "Error! News could not be created."));
     }
 
     header("Location: dashboard.php");
     exit();
 }
 
-function deleteNews() {
+function deleteNews(): void {
     global $conn;
     $newsId = $_POST['news_id'];
 
@@ -75,16 +78,16 @@ function deleteNews() {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        $_SESSION['notification'] = ['type' => 'success', 'message' => "News was successfully deleted!"];
+        setNotification(new Notification(NotificationType::SUCCESS, "News was successfully deleted!"));
     } else {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "Error! News could not be deleted."];
+        setNotification(new Notification(NotificationType::ERROR, "Error! News could not be deleted."));
     }
 
     header("Location: dashboard.php");
     exit();
 }
 
-function saveNews() {
+function saveNews(): void {
     global $conn;
     $newsId = $_POST['news_id'];
     $title = $_POST['title'];
@@ -92,7 +95,7 @@ function saveNews() {
 
     // Validate input
     if (empty($newsId) || empty($title) || empty($description)) {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "All fields are required!"];
+        setNotification(new Notification(NotificationType::ERROR, "All fields are required!"));
         header("Location: dashboard.php");
         exit();
     }
@@ -103,9 +106,9 @@ function saveNews() {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        $_SESSION['notification'] = ['type' => 'success', 'message' => "News was successfully edited!"];
+        setNotification(new Notification(NotificationType::SUCCESS, "News was successfully edited!"));
     } else {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "Error! News could not be edited."];
+        setNotification(new Notification(NotificationType::ERROR, "Error! News could not be edited."));
     }
 
     // Clear the edit session variables

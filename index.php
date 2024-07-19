@@ -20,8 +20,8 @@
 <body>
 
 <?php
-include("header.html");
-include("login.php")
+include_once("header.html");
+include_once("login.php")
 ?>
 </body>
 </html>

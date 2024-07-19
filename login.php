@@ -1,6 +1,6 @@
 <?php
-    include("utils/login.php");
-    include("utils/notifications.php");
+    include_once("utils/login.php");
+    include_once("utils/notifications.php");
 
     // Redirect to dashboard if already logged in
     if (!empty($_SESSION["username"])) {

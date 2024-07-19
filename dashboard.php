@@ -1,6 +1,6 @@
 <?php
-include("routes.php");
-include("utils/notifications.php");
+include_once("routes.php");
+include_once("utils/notifications.php");
 
 // Redirect to login page if the user is not logged in
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -12,7 +12,7 @@ $notification = getNotifications();
 clearNotifications();
 
 $newsArray = getAllNews();
-include("header.html");
+include_once("header.html");
 
 // Initialize variables for editing
 $editNewsId = isset($_SESSION['edit_news_id']) ? $_SESSION['edit_news_id'] : '';

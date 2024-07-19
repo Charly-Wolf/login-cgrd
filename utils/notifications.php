@@ -1,18 +1,32 @@
 <?php
-function getNotifications() {
-    return isset($_SESSION['notification']) ? $_SESSION['notification'] : ['type' => '', 'message' => ''];
+include_once('classes/Notification.php');
+
+function getNotifications(): ?Notification {
+    if (isset($_SESSION['notification'])) {
+        $notificationData = $_SESSION['notification'];
+        $type = NotificationType::from($notificationData['type']);
+        return new Notification($type, $notificationData['message']);
+    }
+    return null;
 }
 
-function displayNotifications($notification) {
-    if (!empty($notification['message'])) {
-        $class = $notification['type'] === 'error' ? 'error-notification' : 'success-notification';
+function displayNotifications(?Notification $notification): void {
+    if ($notification) {
+        $class = $notification->isError() ? 'error-notification' : 'success-notification';
         echo "<div class=\"{$class} notification\">";
-        echo "<p>" . htmlspecialchars($notification['message']) . "</p>";
+        echo "<p>" . htmlspecialchars($notification->getMessage()) . "</p>";
         echo "</div>";
     }
 }
 
-function clearNotifications() {
+function setNotification(Notification $notification): void {
+    $_SESSION['notification'] = [
+        'type' => $notification->getType()->value,
+        'message' => $notification->getMessage()
+    ];
+}
+
+function clearNotifications(): void {
     unset($_SESSION['notification']);
 }
 ?>

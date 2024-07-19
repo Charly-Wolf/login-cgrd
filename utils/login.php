@@ -1,5 +1,7 @@
 <?php
-include("config/connect.php");
+include_once("config/connect.php");
+include_once('notifications.php');
+
 session_start();
 
 if (isset($_POST["login"])) {
@@ -7,7 +9,7 @@ if (isset($_POST["login"])) {
     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (empty(trim($username)) || empty(trim($password))) {
-        $_SESSION['notification'] = ['type' => 'error', 'message' => "Username and password cannot be empty"];
+        setNotification(new Notification(NotificationType::ERROR, "Username and password cannot be empty"));
         header("Location: index.php");
         exit();
     } else {
@@ -24,7 +26,7 @@ if (isset($_POST["login"])) {
             header("Location: dashboard.php");
             exit();
         } else {
-            $_SESSION['notification'] = ['type' => 'error', 'message' => "Wrong Login Data!"];
+            setNotification(new Notification(NotificationType::ERROR, "Wrong Login Data!"));
             header("Location: index.php");
             exit();
         }
