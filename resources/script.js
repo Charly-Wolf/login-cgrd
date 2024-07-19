@@ -19,12 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   )
   cancelBtn.addEventListener('click', handleCancelButtonClick)
 
-  // Hide notifications after 5 seconds
-  notifications.forEach(notification =>
-    setTimeout(() => notification.classList.add('hidden'), 5000)
-  )
-
-  // Functions
+  // Methods
   function toggleNewsList() {
     const isHidden = newsList.style.display === 'none'
     newsList.style.display = isHidden ? 'block' : 'none'

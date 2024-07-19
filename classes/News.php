@@ -1,9 +1,9 @@
 <?php
   class News {
-    private $id;
-    private $title;
-    private $description;
-    private $userId;
+    private int $id;
+    private string $title;
+    private string $description;
+    private string $userId;
 
     public function __construct($title, $description, $userId, $id = null)
     {
@@ -13,31 +13,31 @@
       $this->userId = $userId;
     }
 
-    function getId() {
+    function getId(): int {
       return $this->id;
     }
 
-    function getTitle() {
+    function getTitle(): string {
       return $this->title;
     }
 
-    function getDescription() {
+    function getDescription(): string {
       return $this->description;
     }
 
-    function getUserId() {
+    function getUserId(): int {
       return $this->userId;
     }
 
-    function setTitle($title) {
+    function setTitle($title): void {
       $this->title = $title;
     }
 
-    function setDescription($description) {
+    function setDescription($description): void {
       $this->description = $description;
     }
 
-    function setUserId($userId) {
+    function setUserId($userId): void {
       $this->userId = $userId;
     }
 
