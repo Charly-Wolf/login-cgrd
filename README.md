@@ -78,4 +78,4 @@ This is a simple PHP-based dashboard application with functionalities for user l
 
 ---
 
-Enjoy using the CGRD Dashboard! If you have any questions, feel free to reach out. 😊
+Enjoy using this App! If you have any questions, feel free to reach out. 😊
