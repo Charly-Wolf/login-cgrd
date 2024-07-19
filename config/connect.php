@@ -2,7 +2,7 @@
   define('DB_HOST', 'localhost');
   define('DB_USER', 'root');
   define('DB_PASS', '');
-  define('DB_NAME', 'login_db8');
+  define('DB_NAME', 'login_db');
   define('DB_PORT', 3307);
 
   $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, '', DB_PORT);
