@@ -100,6 +100,13 @@ function saveNews(): void {
         exit();
     }
 
+    // Check if the title or description has changed
+    if ($title == $_POST['title'] && $description == $_POST['description']) {
+        setNotification(new Notification(NotificationType::ERROR, "No changes detected. News was not updated."));
+        header("Location: dashboard.php");
+        exit();
+    }
+
     $sql = "UPDATE news SET title = ?, description = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $title, $description, $newsId);
